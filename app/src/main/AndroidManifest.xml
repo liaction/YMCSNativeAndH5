@@ -2,20 +2,52 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="top.ymwycs.nativeandh5">
 
+  <supports-screens
+      android:anyDensity="true"
+      android:largeScreens="true"
+      android:normalScreens="true"
+      android:resizeable="true"
+      android:smallScreens="true"
+      />
+
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+  <uses-permission android:name="android.permission.GET_TASKS"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
   <application
-      android:allowBackup="true"
-      android:icon="@mipmap/ic_launcher"
+      android:name="io.dcloud.application.DCloudApplication"
+      android:allowClearUserData="true"
+      android:icon="@drawable/icon"
       android:label="@string/app_name"
-      android:roundIcon="@mipmap/ic_launcher_round"
-      android:supportsRtl="true"
-      android:theme="@style/AppTheme">
-    <activity android:name=".MainActivity">
+      android:largeHeap="true"
+      android:theme="@style/DCloudTheme">
+    <activity
+        android:name="io.dcloud.PandoraEntry"
+        android:configChanges="orientation|keyboardHidden"
+        android:label="@string/app_name"
+        android:launchMode="singleTask"
+        android:screenOrientation="user"
+        android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
-
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+    <activity
+        android:name="io.dcloud.PandoraEntryActivity"
+        android:configChanges="orientation|keyboardHidden|screenSize"
+        android:hardwareAccelerated="true"
+        android:label="5+Debug"
+        android:launchMode="singleTask"
+        android:screenOrientation="user"
+        android:theme="@style/DCloudTheme"
+        android:windowSoftInputMode="adjustResize">
+    </activity>
+
+    <service
+        android:name="io.dcloud.common.adapter.io.MiniServerService"
+        android:exported="true"/>
   </application>
 
 </manifest>
