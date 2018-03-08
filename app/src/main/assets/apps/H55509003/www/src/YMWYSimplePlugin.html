@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">Simple Plugin</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="flex-liaction" style="padding: 20px;flex-direction: column;">
+				<button type="button" class="mui-btn mui-btn-green mui-btn-block">sayHello success</button>
+				<button type="button" class="mui-btn mui-btn-green mui-btn-block">sayHello error</button>
+				<button type="button" class="mui-btn mui-btn-red mui-btn-block">重置请求</button>
+			</div>
+			<div class="flex-liaction" style="margin: 20px;border: dashed green 1px;padding: 10px;">
+				<span>调用结果为:</span>
+				<span id="YMResultWY" style="color: red;margin-left: 5px;flex: 1;">
+				</span>
+			</div>
+		</div>
+
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/hui.js"></script>
+		<script src="../js/plugin-ymwy-simple.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			mui.init();
+			var oYMResultWY = document.getElementById("YMResultWY");
+
+			hui('button').click(function() {
+				
+				if(!window.plus) {
+					alert('plus not ready');
+					return;
+				}
+				oYMResultWY.innerHTML = "";
+				switch(hui(this).index()) {
+					case 0:
+						{
+							request(true);
+						}
+						break;
+					case 1:
+						{
+							request(false);
+						}
+						break;
+					case 2:
+						{
+							resetRequest();
+						}
+						break;
+					default:
+						break;
+				}
+			});
+
+			/**
+			 * 请求
+			 * @param {Object} success 请求成功或失败
+			 */
+			function request(success) {
+				// 调用sayHello
+				var argus = {
+					name: 'liaction',
+					time: new Date().toLocaleString(),
+					desc: '发起' + (success ? '成功' : '失败') + '请求',
+					request: success
+				};
+				plus.ymwySimple.sayHello(argus, function(result) {
+					oYMResultWY.innerHTML = JSON.stringify(result);
+					hui(oYMResultWY).css({
+						color: 'green'
+					});
+				}, function(code) {
+					oYMResultWY.innerHTML = 'code : ' + code;
+					hui(oYMResultWY).css({
+						color: 'red'
+					});
+				});
+			}
+			
+			function resetRequest () {
+				var argus = {
+					name: 'liaction',
+					time: new Date().toLocaleString(),
+					desc: '发起重置请求',
+				};
+				plus.ymwySimple.reset(argus, function(result) {
+					oYMResultWY.innerHTML = JSON.stringify(result);
+					hui(oYMResultWY).css({
+						color: 'blue'
+					});
+				});
+			}
+		</script>
+	</body>
+
+</html>

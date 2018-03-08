@@ -738,6 +738,9 @@ p
     z-index: 1;
 
     width: 100%;
+
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
 }
 
 .mui-scrollbar
@@ -5609,4 +5612,9 @@ body > .mui-progressbar
     height: 100%;
 
     border: 0;
+}
+.flex-liaction{
+	display: flex;
+	display: -webkit-flex;
+	display: -box;
 }

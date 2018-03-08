@@ -1,22 +1,50 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-    <title></title>
-    <link href="css/mui.min.css" rel="stylesheet"/>
-</head>
-<body>
-	
-	<header class="mui-bar mui-bar-nav">
-	    <h1 class="mui-title">Native And H5</h1>
-	</header>
-	<div class="mui-content">
-	    2018-03-07
-	</div>
-	<script src="js/mui.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	  	mui.init();
-	</script>
-</body>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">Native And H5</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view" id="YMListItemWY">
+			</ul>
+		</div>
+
+		<script src="js/mui.min.js"></script>
+		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			var oYMListItemWY = document.getElementById("YMListItemWY");
+
+			var aListItems = [{
+				title: 'Simple Plugin',
+				uri: 'src/YMWYSimplePlugin.html'
+			}];
+
+			for(var i = 0; i < aListItems.length; i++) {
+				var item = aListItems[i];
+				oYMListItemWY.innerHTML += '<li class="mui-table-view-cell" id="' + i + '">\
+	                <a class="mui-navigate-right">' + item["title"] + '</a>\
+	            </li>';
+			}
+
+			// 绑定事件
+			mui('ul').on('tap', 'li', function() {
+				var id = parseInt(this.getAttribute('id'));
+				clicked(aListItems[id]['uri'], true, false, {}, {
+					title: aListItems[id]['title']
+				});
+			});
+		</script>
+	</body>
+
 </html>
