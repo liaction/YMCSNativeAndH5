@@ -75,8 +75,7 @@ class YMWYSimplePlugin : StandardFeature(), YMWYBase {
 
     /**
      * todo
-     * [JSUtil.execCallback]的最后一个参数到底有什么作用?待定...
-     * 2018-3-8 15:44:22
+     * [JSUtil.execCallback]的最后一个参数到底有什么作用?官方解释为[是否可多次触发回调函数]
      */
 
   }
